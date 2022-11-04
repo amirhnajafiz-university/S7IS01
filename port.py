@@ -5,6 +5,11 @@ from utils import save_into_file
 
 
 
+# constants
+OUTPUT_FILE = "result_ports_scan.txt"
+
+
+
 """
 Scan ports with nmap.
 """
@@ -23,7 +28,7 @@ def scan_ports(address, st_port, ed_port):
                 ctx += f"port {port} : {nm[host][protocol][port]}\n"
         ctx += "####\n"
 
-        save_into_file("result_ports_scan.txt", ctx)
+        save_into_file(OUTPUT_FILE, ctx)
 
 
 
@@ -36,3 +41,5 @@ def ports_handler():
     stop = input("[Ending port] > ")
 
     scan_ports(network, start, stop)
+
+    print(f'< Results are in {OUTPUT_FILE}')
