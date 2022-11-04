@@ -1,26 +1,36 @@
+# import nmap module.
 import nmap
+# importing save into file function.
+from utils import save_into_file
 
 
-def hostsiniprange(address):
+
+"""
+Scan hosts with nmap and port scanner.
+"""
+def scan_hosts(address):
     nm = nmap.PortScanner()
+
     nm.scan(address, arguments="-n -sP -PE -PA21,23,80,3389")
+
     hosts_list = [(x, nm[x]['status']['state']) for x in nm.all_hosts()]
+
     for host, status in hosts_list:
-        print(f"{host} -> {status}")
+        save_into_file("result_host_scan.txt", f"{host} => {status}")
 
 
 
-def configureaddress(networkaddress, shost, ehost):
-    address_split=networkaddress.split('.')[:3]
-    address = ".".join(address_split)
-    return f"{address}.{shost}-{ehost}"
+"""
+Host handler gets user data and scans the hosts with nmap.
+"""
+def host_handler():
+    # get information from user
+    network = input("[Network address] > ")
+    st_host = input("[Starting host] > ")
+    ed_host = input("[Ending host] > ")
 
+    # making the address for nmap
+    address= f"{'.'.join(network.split('.')[:3])}.{st_host}-{ed_host}"
 
-
-def handlehostscanner():
-    networkaddress = input("[Network address] > ")
-    starting_host = input("Starting host > ")
-    end_host = input("End host > ")
-    address = configureaddress(networkaddress, starting_host, end_host)
-    print(address)
-    hostsiniprange(address=address)
+    # calling host scanning method
+    scan_hosts(address=address)

@@ -1,5 +1,5 @@
 from ping import ping_handler
-from host import handlehostscanner
+from host import host_handler
 from port import handleportscan
 
 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         if cmd == PING_COMMAND:
             ping_handler()
         elif cmd == HOST_COMMAND:
-            handlehostscanner()
+            host_handler()
         elif cmd == PORT_COMMAND:
             handleportscan()
         elif cmd == EXIT_COMMAND:
