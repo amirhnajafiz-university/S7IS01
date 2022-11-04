@@ -16,7 +16,7 @@ Scan ports with nmap.
 def scan_ports(address, st_port, ed_port):
     nm = nmap.PortScanner()
 
-    nm.scan(address, f"{st_port}-{ed_port}")
+    nm.scan(address, ports=f"{st_port}-{ed_port}", arguments="-n")
 
     for host in nm.all_hosts():
         ctx = ""
