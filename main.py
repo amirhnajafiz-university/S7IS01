@@ -16,10 +16,10 @@ EXIT_COMMAND = "exit"
 # showing the project menu
 def menu():
     print()
-    print(f"*. {PING_COMMAND}")
-    print(f"*. {HOST_COMMAND}")
-    print(f"*. {PORT_COMMAND}")
-    print(f"*. {EXIT_COMMAND}")
+    print(f"* {PING_COMMAND}")
+    print(f"* {HOST_COMMAND}")
+    print(f"* {PORT_COMMAND}")
+    print(f"* {EXIT_COMMAND}")
     print()
 
 
@@ -41,4 +41,4 @@ if __name__ == "__main__":
         elif cmd == EXIT_COMMAND:
             break
         else:
-            print("! Wrong input")
+            print("< Wrong input!")
