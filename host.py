@@ -1,5 +1,6 @@
 # import nmap module.
 import nmap
+import time
 # importing save into file function.
 from utils import save_into_file
 
@@ -15,8 +16,10 @@ def scan_hosts(address):
 
     hosts_list = [(x, nm[x]['status']['state']) for x in nm.all_hosts()]
 
+    save_into_file("result_host_scan.txt", f'{time.strftime("%H:%M:%S")}\n')
+
     for host, status in hosts_list:
-        save_into_file("result_host_scan.txt", f"{host} => {status}")
+        save_into_file("result_host_scan.txt", f"{host} => {status}\n")
 
 
 

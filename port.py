@@ -15,7 +15,7 @@ def scan_ports(address, st_port, ed_port):
 
     for host in nm.all_hosts():
         ctx = ""
-        ctx += f'host: {host} / {nm[host].hostname}\n'
+        ctx += f'host: {host} / {nm[host].hostname()}\n'
         ctx += f'state: {nm[host].state()}\n'
         for protocol in nm[host].all_protocols():
             ctx += f'# protocol: {protocol}\n'
