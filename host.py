@@ -17,15 +17,12 @@ Scan hosts with nmap and port scanner.
 """
 def scan(address):
     nm = nmap.PortScanner()
-
-    nm.scan(address, arguments="-n -sP -PE -PA21,23,80,3389")
-
-    hosts_list = [(x, nm[x]['status']['state']) for x in nm.all_hosts()]
+    nm.scan(address, arguments='-sn')
 
     save_into_file(OUTPUT_FILE, f'{time.strftime("%H:%M:%S")}\n')
 
-    for host, status in hosts_list:
-        save_into_file("result_host_scan.txt", f"{host} => {status}\n")
+    for host in nm.all_hosts():
+        save_into_file("result_host_scan.txt", f"{host} => {nm[host].state()}\n")
     
     print(f'< Results are in {OUTPUT_FILE}')
 
