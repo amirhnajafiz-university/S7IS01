@@ -1,24 +1,38 @@
+# import nmap module.
 import nmap
+# import save into files method.
+from utils import save_into_file
 
 
 
-def scanports(address, sport, eport):
+"""
+Scan ports with nmap.
+"""
+def scan_ports(address, st_port, ed_port):
     nm = nmap.PortScanner()
-    nm.scan(address, f"{sport}-{eport}")
+
+    nm.scan(address, f"{st_port}-{ed_port}")
+
     for host in nm.all_hosts():
-        print('Host : %s (%s)' % (host, nm[host].hostname))
-        print('State: %s' % nm[host].state())
-        for proto in nm[host].all_protocols():
-            print("Proto: %s" % proto)
+        ctx = ""
+        ctx += f'host: {host} / {nm[host].hostname}\n'
+        ctx += f'state: {nm[host].state()}\n'
+        for protocol in nm[host].all_protocols():
+            ctx += f'# protocol: {protocol}\n'
+            for port in nm[host][protocol].keys():
+                ctx += f"port {port} : {nm[host][protocol][port]}\n"
+        ctx += "####\n"
 
-            lport = nm[host][proto].keys()
-            for port in lport:
-                print(f"port {port} : {nm[host][proto][port]}")
+        save_into_file("result_ports_scan.txt", ctx)
 
 
 
-def handleportscan():
-    network = input()
-    start = input()
-    stop = input()
-    scanports(network, start, stop)
+"""
+Scan ports.
+"""
+def ports_handler():
+    network = input("[Network address] > ")
+    start = input("[Starting port] > ")
+    stop = input("[Ending port] > ")
+
+    scan_ports(network, start, stop)
