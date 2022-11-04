@@ -1,5 +1,7 @@
 # importing pythonping module
 from pythonping import ping
+# import save into file method
+from utils import save_into_file
 
 
 
@@ -18,6 +20,6 @@ def ping_handler():
     host=input("[Host address] > ")
 
     if ping_host(host=host) == True:
-        print(f"[ping result] < {host} is available.")
+        save_into_file("result_ping.txt", f"[ping result] < {host} is available.\n")
     else:
-        print(f"[ping result] < {host} is not available.")
+        save_into_file("result_ping.txt", f"[ping result] < {host} is not available.\n")
