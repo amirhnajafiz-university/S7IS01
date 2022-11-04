@@ -1,3 +1,4 @@
+# import handlers from files
 from ping import ping_handler
 from host import host_handler
 from port import ports_handler
@@ -14,10 +15,11 @@ EXIT_COMMAND = "exit"
 
 # showing the project menu
 def menu():
-    print(f"1. {PING_COMMAND}")
-    print(f"2. {HOST_COMMAND}")
-    print(f"3. {PORT_COMMAND}")
-    print(f"4. {EXIT_COMMAND}")
+    print()
+    print(f"*. {PING_COMMAND}")
+    print(f"*. {HOST_COMMAND}")
+    print(f"*. {PORT_COMMAND}")
+    print(f"*. {EXIT_COMMAND}")
     print()
 
 
